@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
-const Schema = new Schema;
+const Schema = mongoose.Schema;
 
-const UserSchema = new Schema({
-    username: {
+const userSchema = new Schema({
+    userName: {
         type: String,
         required:[true, 'username is required'],
         unique: true
@@ -24,10 +24,10 @@ const UserSchema = new Schema({
     role: {
         type: String,
         enum: ["admin", "user"],
-        required: true,
+       
       }
 })
 
 
-const UserModel = mongoose.connect("user", UserSchema);
+const UserModel = mongoose.connect("user", userSchema);
 module.exports = UserModel;
