@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken")
 const auth = require ("../middleware/auth")
 const q2m = require("query-to-mongo")
 const userRouter = express.Router();
-const config = require ("../../config/production.json");
+const config = require ("../../config/index.json");
 
 
 
@@ -13,9 +13,9 @@ const config = require ("../../config/production.json");
 // register a user
 
 userRouter.post("/", async(req,res,next)=>{
-    const {firstName, lastName,userName, password} = req.body;
+    const {firstName, lastName,username, password} = req.body;
     try{
-        let user = await UserModel.findOne({userName})
+        let user = await UserModel.findOne({username})
         if(user){
             const error = new Error("user already exist");
             error.httpStatusCode = 404;
@@ -24,7 +24,7 @@ userRouter.post("/", async(req,res,next)=>{
             user = new UserModel({
                 firstName,
                 lastName,
-                userName,
+                username,
                 password
             })
 
